@@ -13,9 +13,9 @@ interface UrlInterface {
         @Query("api_key") api_key: String,
         @Query("per_page") per_page: Int,
         @Header("format") format: String,
-        @Query("nojsoncallback") nojsoncallback: Int
+        @Header("nojsoncallback") nojsoncallback: Int
     )
 
-            : Call<BasePhotosModel>
+            : Call<List<BasePhotosModel>>
 
 }

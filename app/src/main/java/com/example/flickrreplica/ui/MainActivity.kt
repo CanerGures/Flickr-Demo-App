@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flickrreplica.R
 import com.example.flickrreplica.model.BasePhotosModel
+import com.example.flickrreplica.model.UrlBuilderModel
 import com.example.flickrreplica.util.ServiceBuilder
 import com.example.flickrreplica.util.UrlInterface
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
@@ -61,14 +64,19 @@ class MainActivity : AppCompatActivity() {
         //urlInterface = retrofit.create(UrlInterface::class.java)
         //val getUrls = urlInterface.getCredentials()
 
+        val logging = HttpLoggingInterceptor()
+        val okHttp = OkHttpClient.Builder()
+        logging.level = HttpLoggingInterceptor.Level.BODY
+        okHttp.addInterceptor(logging)
+
         val request = ServiceBuilder.buildService(UrlInterface::class.java)
         val getUrls = request.getCredentials(method, api, perPage, format, nojsoncallback)
 
 
-        getUrls.enqueue(object : Callback<BasePhotosModel> {
+        getUrls.enqueue(object : Callback<List<BasePhotosModel>> {
             override fun onResponse(
-                call: Call<BasePhotosModel>,
-                response: Response<BasePhotosModel>
+                call: Call<List<BasePhotosModel>>,
+                response: Response<List<BasePhotosModel>>
             ) {
 
 
@@ -76,27 +84,37 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, "in response", Toast.LENGTH_SHORT).show()
                     progressBar.visibility = View.GONE
 
-                    val list = (response.body() as ArrayList<BasePhotosModel>?)!!
-                    val farmId: String =
-                        list.forEach(Consumer { it.photos.photo.forEach(Consumer { it.farm }) })
-                            .toString()
-                    val serverId: String =
-                        list.forEach(Consumer { it.photos.photo.forEach(Consumer { it.server }) })
-                            .toString()
-                    val secretId: String =
-                        list.forEach(Consumer { it.photos.photo.forEach(Consumer { it.secret }) })
-                            .toString()
-                    val id: String =
-                        list.forEach(Consumer { it.photos.photo.forEach(Consumer { it.id }) })
-                            .toString()
+                    val list = ArrayList<UrlBuilderModel>()
+                    val listb = (response.body() as ArrayList<BasePhotosModel>?)!!
+                    for (i in listb) {
+
+                        val farm: String =
+                            listb.forEach(Consumer { it.photos.photo.forEach(Consumer { it.farm }) })
+                                .toString()
+                        val serverId: String =
+                            listb.forEach(Consumer { it.photos.photo.forEach(Consumer { it.server }) })
+                                .toString()
+                        val secretId: String =
+                            listb.forEach(Consumer { it.photos.photo.forEach(Consumer { it.secret }) })
+                                .toString()
+                        val id: String =
+                            listb.forEach(Consumer { it.photos.photo.forEach(Consumer { it.id }) })
+                                .toString()
+
+                        var data = UrlBuilderModel(farm, serverId, secretId, id)
+
+                        list.add(data)
+
+                    }
 
 
                     //parseResult(jsonArray)
                 }
             }
 
-            override fun onFailure(call: Call<BasePhotosModel>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "in fail", Toast.LENGTH_SHORT).show()
+            override fun onFailure(call: Call<List<BasePhotosModel>>, t: Throwable) {
+                Toast.makeText(this@MainActivity, "infail", Toast.LENGTH_SHORT).show()
+
             }
 
         })
