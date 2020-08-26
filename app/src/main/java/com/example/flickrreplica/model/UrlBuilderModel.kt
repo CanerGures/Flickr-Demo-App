@@ -6,3 +6,9 @@ data class UrlBuilderModel(
     val secretId: String,
     val id: String
 )
+
+data class ContainerPhoto(
+    val id: String,
+    val url: String,
+    val title: String
+)
