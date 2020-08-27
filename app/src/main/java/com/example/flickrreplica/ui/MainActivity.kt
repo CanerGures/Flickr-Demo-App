@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         val photosAdapter = PhotosAdapter()
 
 
-
         recyclerView.adapter = photosAdapter
         recyclerView.layoutManager = GridLayoutManager(this, 3)
 
@@ -50,8 +49,6 @@ class MainActivity : AppCompatActivity() {
 
                 if (dx == recyclerView.getChildAt(0).measuredHeight - recyclerView.measuredHeight) {
 
-                    val sdksd: Int = 1
-
                     photosViewModel.loadPhotos(page).observe(this@MainActivity,
                         Observer<List<ContainerPhoto>> { list ->
                             with(photosAdapter) {
@@ -62,6 +59,7 @@ class MainActivity : AppCompatActivity() {
                         })
                     page++
                 }
+
 
                 /*override fun onScrollChange(
                     v: NestedScrollView?,
