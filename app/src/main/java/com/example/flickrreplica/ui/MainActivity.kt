@@ -1,7 +1,6 @@
 package com.example.flickrreplica.ui
 
 import android.os.Bundle
-import android.widget.ProgressBar
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val nestedScroll: NestedScrollView = findViewById(R.id.scrollView)
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        val progressBar: ProgressBar = findViewById(R.id.progressBar)
+        //val progressBar: ProgressBar = findViewById(R.id.progressBar)
         val photosViewModel: PhotosViewModel by viewModels()
         val photosAdapter = PhotosAdapter()
 
