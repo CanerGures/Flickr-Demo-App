@@ -53,6 +53,6 @@ object WebClient {
 }
 
 interface ApiService {
-    @GET("?method=flickr.photos.getRecent&api_key=ead2f546853266129d7216089a406cfc&per_page=21&format=json&nojsoncallback=1")
+    @GET("?method=flickr.photos.getRecent&api_key=ead2f546853266129d7216089a406cfc&per_page=56&format=json&nojsoncallback=1")
     suspend fun fetchImages(@Query(value = "page") page: Int): BasePhotosModel
 }
