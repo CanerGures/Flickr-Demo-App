@@ -1,9 +1,9 @@
 package com.example.flickrreplica.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,17 +22,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val nestedScroll: NestedScrollView = findViewById(R.id.scrollView)
+
+        //val nestedScroll: NestedScrollView = findViewById(R.id.scrollView)
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         //val progressBar: ProgressBar = findViewById(R.id.progressBar)
-        val photosViewModel: PhotosViewModel by viewModels()
         val photosAdapter = PhotosAdapter()
 
 
         recyclerView.adapter = photosAdapter
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
+        val gridLayoutManager = GridLayoutManager(this, 3)
+        recyclerView.layoutManager = gridLayoutManager
 
-        photosViewModel.loadPhotos(page).observe(this,
+        val isLoading = false
+        val isLastPage = false
+        photosViewModel.loadPhotos(page).observe(this@MainActivity,
             Observer<List<ContainerPhoto>> { list ->
                 with(photosAdapter) {
                     photos.clear()
@@ -41,63 +44,36 @@ class MainActivity : AppCompatActivity() {
                 }
             })
 
+
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                if (dx == recyclerView.getChildAt(0).measuredHeight - recyclerView.measuredHeight) {
 
-                    photosViewModel.loadPhotos(page).observe(this@MainActivity,
-                        Observer<List<ContainerPhoto>> { list ->
-                            with(photosAdapter) {
-                                photos.clear()
-                                photos.addAll(list)
-                                notifyDataSetChanged()
-                            }
-                        })
-                    page++
+                if (!recyclerView.canScrollVertically(1) && dy > 0) {
+                    Toast.makeText(this@MainActivity, "LAST", Toast.LENGTH_LONG).show()
+                    getData()
+                } else if (!recyclerView.canScrollVertically(-1) && dy < 0) {
+                    Toast.makeText(this@MainActivity, "BEGIN", Toast.LENGTH_LONG).show()
                 }
 
-
-                /*override fun onScrollChange(
-                    v: NestedScrollView?,
-                    scrollX: Int,
-                    scrollY: Int,
-                    oldScrollX: Int,
-                    oldScrollY: Int
-                ) {
-                    if(scrollX == v!!.getChildAt(0).measuredHeight - v.measuredHeight) {
-
-                        val sdksd: Int = 1
-
-                        photosViewModel.loadPhotos(page).observe(this@MainActivity,
-                            Observer<List<ContainerPhoto>> { list ->
-                                with(photosAdapter) {
-                                    photos.clear()
-                                    photos.addAll(list)
-                                    notifyDataSetChanged()
-                                }
-                            })
-                        page++
-
-
-                    }
-                }*/
             }
+
         })
+    }
 
+    private fun getData() {
+        page++
+        photosViewModel.loadPhotos(page).observe(this,
+            Observer<List<ContainerPhoto>> { list ->
+                with(photosAdapter) {
 
-        /*//recyclerView.adapter =  PhotoRecycAdapter()
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
+                    photos.addAll(list)
+                    notifyDataSetChanged()
+                }
+            })
 
-        getData(
-            "flickr.photos.getRecent",
-            "application/json",
-            20,
-            "347c82e61bd5c5154ad9c1cdb14e3c26",
-            1
-        )*/
     }
 
     /* private fun getData(
