@@ -10,5 +10,7 @@ Implementation of an Flickr API (getRecent). Practiced coroutines and Retrofit.
 - Recycler View
 - Retrofit2
 - Coroutines
+- Paging(Infinite Scroll)
+
 
 
