@@ -2,7 +2,8 @@
 Implementation of an Flickr API (getRecent). Practiced coroutines and Retrofit.
 
 ## Screen Shots 📱
-![](https://media.giphy.com/media/J3LwRlDfyHmyfgChCL/giphy.gif)
+
+![](https://media.giphy.com/media/dxyb4DfJrXrjQFcWbL/giphy.gif)
 
 ## Libraries and Tools 🛠
 
