@@ -1,7 +1,8 @@
 package com.example.flickrreplica.ui
 
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
+import android.widget.ProgressBar
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         //val nestedScroll: NestedScrollView = findViewById(R.id.scrollView)
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        //val progressBar: ProgressBar = findViewById(R.id.progressBar)
+        val progressBar: ProgressBar = findViewById(R.id.progressBar)
         val photosAdapter = PhotosAdapter()
 
 
@@ -38,7 +39,6 @@ class MainActivity : AppCompatActivity() {
         photosViewModel.loadPhotos(page).observe(this@MainActivity,
             Observer<List<ContainerPhoto>> { list ->
                 with(photosAdapter) {
-                    photos.clear()
                     photos.addAll(list)
                     notifyDataSetChanged()
                 }
@@ -52,10 +52,11 @@ class MainActivity : AppCompatActivity() {
 
 
                 if (!recyclerView.canScrollVertically(1) && dy > 0) {
-                    Toast.makeText(this@MainActivity, "LAST", Toast.LENGTH_LONG).show()
+
                     getData()
+                    progressBar.visibility = View.GONE
                 } else if (!recyclerView.canScrollVertically(-1) && dy < 0) {
-                    Toast.makeText(this@MainActivity, "BEGIN", Toast.LENGTH_LONG).show()
+
                 }
 
             }
@@ -65,6 +66,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getData() {
         page++
+
         photosViewModel.loadPhotos(page).observe(this,
             Observer<List<ContainerPhoto>> { list ->
                 with(photosAdapter) {
@@ -73,6 +75,7 @@ class MainActivity : AppCompatActivity() {
                     notifyDataSetChanged()
                 }
             })
+
 
     }
 }

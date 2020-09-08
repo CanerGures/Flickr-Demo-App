@@ -23,29 +23,10 @@ class PhotosViewModel : ViewModel() {
                     url = "https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg",
                     title = photo.title
                 )
+
             }
             mutablePhotosLiveData.postValue(photosList)
         }
         return photosLiveData
     }
 }
-/*class PhotosViewModel2 : ViewModel() {
-    private val mutablePhotosLiveData = MutableLiveData<List<ContainerPhoto>>()
-    val photosLiveData: LiveData<List<ContainerPhoto>> = mutablePhotosLiveData
-
-    var photosAdapter = PhotosAdapter()
-}
-    suspend fun fetchImages(page: String): List<ContainerPhoto>{
-        if(page.isBlank()){
-            return emptyList()
-        }
-        val searchResponse = WebClient.client.fetchImages(page)
-        return searchResponse.photos.photo.map { photo ->
-            ContainerPhoto(
-                id = photo.id,
-                url = "https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg",
-                title = photo.title
-            )
-        }
-
-    }*/

@@ -10,22 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-/*object ServiceBuilder {
-    private val client = OkHttpClient.Builder().build()
-
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://www.flickr.com/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(client)
-        .build()
-
-    fun <T> buildService(service: Class<T>): T {
-
-        return retrofit.create(service)
-
-    }
-}*/
-
 private const val BASE_URL = "https://api.flickr.com/services/rest/"
 private const val CONNECTION_TIMEOUT_MS: Long = 10
 
