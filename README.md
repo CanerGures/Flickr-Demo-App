@@ -1,5 +1,5 @@
 # Flickr-Demo-App
-Implementation of an Flickr API (getRecent). Practiced coroutines and Retrofit.
+Implementation of an Flickr API (getRecent). Practiced coroutines and Retrofit. There is 20 photo per page and scroll is infinite until 50 pages are finished.
 
 ## Screen Shots 📱
 
