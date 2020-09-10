@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">FlickrReplica</string>
     <string name="flickrlogo">flickrLogo</string>
+    <string name="singleimageview">singleImageView</string>
+    <string name="recyclerviewitems">recyclerviewItems</string>
 </resources>

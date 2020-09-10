@@ -4,21 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/scrollView"
+    android:background="@color/colorDark"
+    android:orientation="vertical"
+    android:padding="4dp"
     tools:context=".ui.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/recycLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="4dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:nestedScrollingEnabled="false"
             android:layout_margin="16dp"
             tools:listitem="@layout/photo_card" />
 
@@ -28,6 +24,5 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
 
-    </LinearLayout>
 
 </LinearLayout>

@@ -34,10 +34,11 @@ class PhotosAdapter(val photos: MutableList<ContainerPhoto> = mutableListOf()) :
             intent.putExtra("currentItem", photos[position])
             it.context.startActivity(intent)
 
+
         }
     }
 
-    inner class PhotosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class PhotosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(photo: ContainerPhoto) {
             Glide.with(itemView.context)
                 .load(photo.url)

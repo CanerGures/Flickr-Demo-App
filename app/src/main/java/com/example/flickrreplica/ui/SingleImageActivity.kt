@@ -14,7 +14,10 @@ class SingleImageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_single_image)
 
         val currentCity = intent.extras?.get("currentItem") as ContainerPhoto
+        newImage(currentCity)
+    }
 
+    private fun newImage(currentCity: ContainerPhoto) {
         Glide.with(this)
             .load(currentCity.url)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
