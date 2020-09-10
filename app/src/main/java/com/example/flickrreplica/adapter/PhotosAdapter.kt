@@ -1,5 +1,6 @@
 package com.example.flickrreplica.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.flickrreplica.R
 import com.example.flickrreplica.model.ContainerPhoto
+import com.example.flickrreplica.ui.SingleImageActivity
 import kotlinx.android.synthetic.main.photo_card.view.*
 
 class PhotosAdapter(val photos: MutableList<ContainerPhoto> = mutableListOf()) :
@@ -26,6 +28,13 @@ class PhotosAdapter(val photos: MutableList<ContainerPhoto> = mutableListOf()) :
 
     override fun onBindViewHolder(holder: PhotosViewHolder, position: Int) {
         holder.bind(photos[position])
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(it.context, SingleImageActivity::class.java)
+            intent.putExtra("currentItem", photos[position])
+            it.context.startActivity(intent)
+
+        }
     }
 
     inner class PhotosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -36,6 +45,7 @@ class PhotosAdapter(val photos: MutableList<ContainerPhoto> = mutableListOf()) :
                 .fitCenter()
                 .into(itemView.photoView)
         }
+
     }
 }
 

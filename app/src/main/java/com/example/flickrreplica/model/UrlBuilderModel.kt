@@ -1,5 +1,7 @@
 package com.example.flickrreplica.model
 
+import java.io.Serializable
+
 data class UrlBuilderModel(
     val farmId: String,
     val serverId: String,
@@ -11,4 +13,4 @@ data class ContainerPhoto(
     val id: String,
     val url: String,
     val title: String
-)
+) : Serializable
