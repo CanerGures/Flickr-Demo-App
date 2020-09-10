@@ -1,7 +1,6 @@
 package com.example.flickrreplica.ui
 
 import android.os.Bundle
-import android.view.View
 import android.widget.ProgressBar
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -34,8 +33,6 @@ class MainActivity : AppCompatActivity() {
         val gridLayoutManager = GridLayoutManager(this, 3)
         recyclerView.layoutManager = gridLayoutManager
 
-        val isLoading = false
-        val isLastPage = false
         photosViewModel.loadPhotos(page).observe(this@MainActivity,
             Observer<List<ContainerPhoto>> { list ->
                 with(photosAdapter) {
@@ -43,6 +40,8 @@ class MainActivity : AppCompatActivity() {
                     notifyDataSetChanged()
                 }
             })
+
+
 
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -54,12 +53,13 @@ class MainActivity : AppCompatActivity() {
                 if (!recyclerView.canScrollVertically(1) && dy > 0) {
 
                     getData()
-                    progressBar.visibility = View.GONE
+
                 } else if (!recyclerView.canScrollVertically(-1) && dy < 0) {
 
                 }
 
             }
+
 
         })
     }

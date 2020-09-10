@@ -19,6 +19,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:nestedScrollingEnabled="false"
+            android:layout_margin="16dp"
             tools:listitem="@layout/photo_card" />
 
         <ProgressBar
