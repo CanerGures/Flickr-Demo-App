@@ -17,6 +17,11 @@ Implementation of an Flickr API (getRecent). Practiced coroutines and Retrofit. 
 <li><a href="https://developer.android.com/kotlin/coroutines">Coroutines</a></li>
 <li><a href="https://developer.android.com/topic/libraries/architecture/paging">Pagination</a></li>
 
+## Architecture
+The app uses MVVM [Model-View-ViewModel] architecture to have a unidirectional flow of data, separation of concern, and a lot more.
+
+![Architecture](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
+
 
 
 
