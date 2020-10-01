@@ -7,12 +7,16 @@ Implementation of an Flickr API (getRecent). Practiced coroutines and Retrofit. 
 
 ## Libraries and Tools 🛠
 
-- Splash Screen
-- Recycler View
-- Retrofit2
-- MVVM Architecture
-- Coroutines
-- Paging(Infinite Scroll)
+<li><a href="https://developer.android.com/jetpack/guide">MVVM</a></li>
+<li><a href="https://developer.android.com/topic/libraries/architecture/viewmodel">ViewModel</a></li>
+<li><a href="https://developer.android.com/topic/libraries/architecture/livedata">LiveData</a></li>
+<li><a href="https://developer.android.com/topic/libraries/data-binding">Data Binding</a></li>
+<li><a href="https://square.github.io/retrofit/">Retrofit</a></li>
+<li><a href="https://github.com/square/okhttp">OkHttp</a></li>
+<li><a href="https://developer.android.com/guide/topics/ui/layout/recyclerview">RecyclerView</a></li>
+<li><a href="https://developer.android.com/kotlin/coroutines">Coroutines</a></li>
+<li><a href="https://developer.android.com/topic/libraries/architecture/paging">Pagination</a></li>
+
 
 
 
